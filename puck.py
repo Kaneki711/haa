@@ -398,13 +398,23 @@ def puyBot(op):
         #      puy.acceptGroupInvitation(op.param1)
         #      puy.sendMessage(op.param1, settings["autoJoinMessage"], [op.param2])
                 
-        if op.type == 13:
-            print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
-            if settings["autoJoin"] == True:
-                gidd = puy.getGroup(op.param1)
+         if op.type == 13:
+             print ("[ 13 ] INVITE INTO GROUP")
+             if puyMid in op.param3:
+                 if settings["autoJoin"] == True:
+                   dan = puy.getContact(op.param2)
+                   tgb = puy.getGroup(op.param1)
+                   puy.acceptGroupInvitation(op.param1)
+
+                   sendMention(op.param1, "@!, Thx for invited Me".format(str(tgb.name)),[op.param2])
+                   #puy.sendImageWithURL(op.param1, "http://dl.profile.line-cdn.net{}".format(dan.picturePath))
+        #if op.type == 13:
+        #    print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
+         #   if settings["autoJoin"] == True:
+      #          gidd = puy.getGroup(op.param1)
                 #puy.sendMessage(op.param1, "[ Nama Group ]\n" + gid.name)
-                puy.acceptGroupInvitation(op.param1)
-                puy.sendMessage(op.param1, "EN : Thanks for invite me to group\nID : Terimakasi sudah mengundang saya ke grup\n\nType .help for See a Commands")
+      #          puy.acceptGroupInvitation(op.param1)
+    #            puy.sendMessage(op.param1, "EN : Thanks for invite me to group\nID : Terimakasi sudah mengundang saya ke grup\n\nType .help for See a Commands")
                 #dap.sendMessage(op.param1, "Thx for invited me\n help for more")
                 
         if op.type == 19:

@@ -374,7 +374,7 @@ def helpmedia():
                     "12) " + key + "CariMusik (text)" + "\n" + \
                     "13) " + key + "CariLirik (text)" + "\n" + \
                     "14) " + key + "DoujinSearch (text)" + "\n" + \
-                    "15) " + key + "YoutubeSearch (text)" + "\n\n" + \                    
+                    "15) " + key + "YoutubeSearch (text)" + "\n\n" + \
                     "  「Use " + key + " For the Prefix」" + "\n" + \
                     "~「Creator : @!」"
     return helpMedia

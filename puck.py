@@ -102,8 +102,8 @@ read = {
 try:
     with open("Log_data.json","r",encoding="utf_8_sig") as f:
         msg_dict = json.loads(f.read())
-    with open("Log_data.json","r",encoding="utf_8_sig") as f:
-        msg_dict = json.loads(f.unsend())
+    #with open("Log_data.json","r",encoding="utf_8_sig") as f:
+    #    msg_dict = json.loads(f.unsend())
     with open("sticker.json","r") as f:
         stickers = json.loads(f)
         for sticker in stickers:
@@ -172,9 +172,9 @@ def backupData():
         backup = read
         f = codecs.open('read.json','w','utf-8')
         json.dump(backup, f, sort_keys=True, indent=4, ensure_ascii=False)
-        backup = unsend
-        f = codecs.open('unsend.json','w','utf-8')
-        json.dump(backup, f, sort_keys=True, indent=4, ensure_ascii=False)
+#        backup = unsend
+#        f = codecs.open('unsend.json','w','utf-8')
+#        json.dump(backup, f, sort_keys=True, indent=4, ensure_ascii=False)
         return True
     except Exception as error:
         logError(error)
@@ -207,14 +207,6 @@ def sendMentionV2(to, text="", mids=[]):
         arr.append(arrData)
         textx += mention + str(text)
     puy.sendMessage(to, textx, {'MENTION': str('{"MENTIONEES":' + json.dumps(arr) + '}')}, 0)    
-
-def unsMes(id):
-    puy.unsendMessage(id)
-    for i in Mid:
-        thread1 = threading.Thread(target=unsMes, args=(i,))
-        thread1.start()
-        thread1.join()
-    puy.sendMessage(to, '「 Unsend {} message 」'.format(len(Mid)))
 
 def siderMembers(to, mid):
     arrData = ""
@@ -346,16 +338,24 @@ def helpmessage():
         key = ''
     helpMessage =   "\n  「 PUY  」     " + "\n" + \
                     "1) " + key + "About puy " + "\n" + \
-                    "2) " + key + "Token" + "\n" + \
-                    "3) " + key + "Keluar" + "\n" + \
-                    "4) " + key + "helpMedia" + "\n" + \
-                    "   - Setautoadd: " + "\n" + \
-                    "   - Setautojoin: " + "\n" + \
-                    "   - Setautoreply: " + "\n\n" + \
+                    "2) " + key + "HelpMedia" + "\n" + \
+                    "3) " + key + "Token" + "\n\n" + \
                     "  「 CEKSIDER & MENTION  」" + "\n" + \
-                    "5) " + key + "Ceksider On/Off - [For SetRead]" + "\n" + \
-                    "6) " + key + "Ceksider reset - [For Reset reader point]" + "\n" + \
-                    "7) " + key + "Ceksider - [For Ceksider]" + "\n\n" + \
+                    "4) " + key + "Ceksider On/Off - [For SetRead]" + "\n" + \
+                    "5) " + key + "Ceksider reset - [For Reset reader point]" + "\n" + \
+                    "6) " + key + "Ceksider - [For Ceksider]" + "\n\n" + \
+                    " 「 Owner Commands 」" + "\n" + \
+                    " " + key + "Keluar" + "\n" + \
+                    " " + key + "Bc:" + "\n" + \
+                    " " + key + "Prefix" + "\n" + \
+                    " " + key + "Prefix on" + "\n" + \
+                    " " + key + "Prefix off" + "\n" + \
+                    " " + key + "Logout" + "\n" + \
+                    " " + key + "Perbarui" + "\n" + \
+                    " " + key + "SetAutoAdd:" + "\n" + \
+                    " " + key + "SetPrefix:" + "\n" + \
+                    " " + key + "SetAutoJoin:" + "\n" + \
+                    " " + key + "SetAutoReply" + "\n\n" + \
                     "  「Use " + key + " For the Prefix」" + "\n" + \
                     "  「From Helloworld / Edited by Puy」" + "\n" + \
                     "~「Creator : @!」"
@@ -367,14 +367,14 @@ def helpmedia():
     else:
         key = ''
     helpMedia =   "\n  「 MEDIA 」     " + "\n" + \
-                    "8) " + key + "InstaInfo (Username)" + "\n" + \
-                    "9) " + key + "InstaStory (Username*number)" + "\nExam :" + key +"Instastory muh.khadaffy*1\n" + \
-                    "10) " + key + "Quotes" + "\n" + \
-                    "11) " + key + "Carigambar (text)" + "\n" + \
-                    "12) " + key + "CariMusik (text)" + "\n" + \
-                    "13) " + key + "CariLirik (text)" + "\n" + \
-                    "14) " + key + "DoujinSearch (text)" + "\n" + \
-                    "15) " + key + "YoutubeSearch (text)" + "\n\n" + \
+                    "7) " + key + "InstaInfo (Username)" + "\n" + \
+                    "8) " + key + "InstaStory (Username*number)" + "\nExam :" + key +"Instastory muh.khadaffy*1\n" + \
+                    "9) " + key + "Quotes" + "\n" + \
+                    "10) " + key + "Carigambar (text)" + "\n" + \
+                    "11) " + key + "CariMusik (text)" + "\n" + \
+                    "12) " + key + "CariLirik (text)" + "\n" + \
+                    "13) " + key + "DoujinSearch (text)" + "\n" + \
+                    "14) " + key + "YoutubeSearch (text)" + "\n\n" + \
                     "  「Use " + key + " For the Prefix」" + "\n" + \
                     "~「Creator : @!」"
     return helpMedia
@@ -388,15 +388,25 @@ def puyBot(op):
         if op.type == 5:
             print ("[ 5 ] NOTIFIED ADD CONTACT")
             if settings["autoAdd"] == True:
-                puy.findAndAddContactsByMid(op.param1)
-            puy.sendMention(op.param1, settings["autoAddMessage"], [op.param1])
+              puy.findAndAddContactsByMid(op.param1)
+              puy.sendMessage(op.param1, settings["autoAddMessage"], [op.param1])
+                
+        #if op.type == 13:
+        #    print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
+        #    #if settings["autoJoin"] and puyMid in op.param3:
+        #    if settings["autoJoin"] == True:
+        #      puy.acceptGroupInvitation(op.param1)
+        #      puy.sendMessage(op.param1, settings["autoJoinMessage"], [op.param2])
                 
         if op.type == 13:
             print ("[ 13 ] NOTIFIED INVITE INTO GROUP")
-            if settings["autoJoin"] and puyMid in op.param3:
+            if settings["autoJoin"] == True:
+                gidd = puy.getGroup(op.param1)
+                #puy.sendMessage(op.param1, "[ Nama Group ]\n" + gid.name)
                 puy.acceptGroupInvitation(op.param1)
-                puy.sendMention(op.param1, settings["autoJoinMessage"], [op.param2])
-
+                puy.sendMessage(op.param1, "EN : Thanks for invite me to group\nID : Terimakasi sudah mengundang saya ke grup\n\nType .help for See a Commands")
+                #dap.sendMessage(op.param1, "Thx for invited me\n help for more")
+                
         if op.type == 19:
             print ("[ 19 ] NOTIFIED KICKOUT FROM GROUP")
             group = puy.getGroup(op.param1)
@@ -776,7 +786,7 @@ def puyBot(op):
                                     #sendMention(receiver,"*Ceksider belum diaktifkan\nKetik 「 #ceksider on 」 untuk mengaktifkan\n@!")
                                     puy.sendMessage(receiver,"*Ceksider belum diaktifkan\nKetik 「 #ceksider on 」 untuk mengaktifkan.")
                                     
-                            elif cmd.startswith("#keluar"):
+                            elif cmd.startswith("keluar"):
                                 #tgb = puy.getGroup(op.param1)
                                 #dan = puy.getContact(op.param2)
                                 #gid = puy.getGroup(to)
@@ -1385,7 +1395,7 @@ def puyBot(op):
                                 for mention in mentionees:
                                     if puyMid in mention["M"]:
                                         if settings["autoRespon"] == True:
-                                            puy.sendMention(sender, settings["autoResponMessage"], [sender])
+                                            puy.sendMessage(sender, settings["autoResponMessage"], [sender])
                                         break
                     if to in read["readPoint"]:
                         if sender not in read["ROM"][to]:
@@ -1405,19 +1415,19 @@ def puyBot(op):
                                     group = puy.findGroupByTicket(ticket_id)
                                     puy.acceptGroupInvitationByTicket(group.id,ticket_id)
                                     puy.sendMessage(to, "Successed Joined to Group %s" % str(group.name))
-                        if 'MENTION' in msg.contentMetadata.keys()!= None:
-                            names = re.findall(r'@(\w+)', text)
-                            mention = ast.literal_eval(msg.contentMetadata['MENTION'])
-                            mentionees = mention['MENTIONEES']
-                            lists = []
-                            for mention in mentionees:
-                                if puyMid in mention["M"]:
-                                    if settings["detectMention"] == True:
-                                        contact = puy.getContact(sender)
-                                        #puy.sendMessage(to, "Hey don't Tag Me! I'ts Annoying.")
-                                        sendMention(to, " @!, Hey don't Tag Me! I'ts Annoying.", [sender])
-                                        puy.sendContact(to, sender)
-                                    break
+                        #if 'MENTION' in msg.contentMetadata.keys()!= None:
+                        #    names = re.findall(r'@(\w+)', text)
+                        #    mention = ast.literal_eval(msg.contentMetadata['MENTION'])
+                        #    mentionees = mention['MENTIONEES']
+                        #    lists = []
+                        #    for mention in mentionees:
+                        #        if puyMid in mention["M"]:
+                        #            if settings["detectMention"] == True:
+                        #                contact = puy.getContact(sender)
+                        #                #puy.sendMessage(to, "Hey don't Tag Me! I'ts Annoying.")
+                        #                sendMention(to, " @!, Hey don't Tag Me! I'ts Annoying.", [sender])
+                        #                puy.sendContact(to, sender)
+                        #            break
                         if 'MENTION' in msg.contentMetadata.keys()!= None:
                             names = re.findall(r'@(\w+)', text)
                             mention = ast.literal_eval(msg.contentMetadata['MENTION'])
@@ -1426,7 +1436,7 @@ def puyBot(op):
                             for mention in mentionees:
                                 if puyMid in mention["M"]:
                                     if settings["autoRespon"] == True:
-                                        sendMention(sender, " @!, Hey don't Tag Me! I'ts Annoying.", [sender])
+                                        puy.sendMessage(sender, " @!, Hey don't Tag Me! I'ts Annoying.", [sender])
                                     break
                         if settings["detectUnsend"] == True:
                             try:
@@ -1472,44 +1482,44 @@ def puyBot(op):
                                 puy.sendMessage(to, "Dia tidak masuk daftar hitam ")
                                 settings["dblack"] = False
                             backupData()                            
-                    elif msg.contentType == 16:
-                        if settings["checkPost"] == True:
-                            try:
-                                ret_ = "\n  [ Details Post ]  "
-                                if msg.contentMetadata["serviceType"] == "GB":
-                                    contact = puy.getContact(sender)
-                                    auth = "\n  Author : {}".format(str(contact.displayName))
-                                else:
-                                    auth = "\n  Author : {}".format(str(msg.contentMetadata["serviceName"]))
-                                purl = "\n  URL : {}".format(str(msg.contentMetadata["postEndUrl"]).replace("line://","https://line.me/R/"))
-                                ret_ += auth
-                                ret_ += purl
-                                if "mediaOid" in msg.contentMetadata:
-                                    object_ = msg.contentMetadata["mediaOid"].replace("svc=myhome|sid=h|","")
-                                    if msg.contentMetadata["mediaType"] == "V":
-                                        if msg.contentMetadata["serviceType"] == "GB":
-                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
-                                            murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(msg.contentMetadata["mediaOid"]))
-                                        else:
-                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
-                                            murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(object_))
-                                        ret_ += murl
-                                    else:
-                                        if msg.contentMetadata["serviceType"] == "GB":
-                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
-                                        else:
-                                            ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
-                                    ret_ += ourl
-                                if "stickerId" in msg.contentMetadata:
-                                    stck = "\n  Sticker : https://line.me/R/shop/detail/{}".format(str(msg.contentMetadata["packageId"]))
-                                    ret_ += stck
-                                if "text" in msg.contentMetadata:
-                                    text = "\n  the contents of writing : {}".format(str(msg.contentMetadata["text"]))
-                                    ret_ += text
-                                ret_ += "\n"
-                                puy.sendMessage(to, str(ret_))
-                            except:
-                                puy.sendMessage(to, "\nInvalid post\n")
+                    #elif msg.contentType == 16:
+                    #    if settings["checkPost"] == True:
+                    #        try:
+                    #            ret_ = "\n  [ Details Post ]  "
+                    #            if msg.contentMetadata["serviceType"] == "GB":
+                    #                contact = puy.getContact(sender)
+                    #                auth = "\n  Author : {}".format(str(contact.displayName))
+                    #            else:
+                    #                auth = "\n  Author : {}".format(str(msg.contentMetadata["serviceName"]))
+                    #            purl = "\n  URL : {}".format(str(msg.contentMetadata["postEndUrl"]).replace("line://","https://line.me/R/"))
+                    #            ret_ += auth
+                    #            ret_ += purl
+                    #            if "mediaOid" in msg.contentMetadata:
+                    #                object_ = msg.contentMetadata["mediaOid"].replace("svc=myhome|sid=h|","")
+                    #                if msg.contentMetadata["mediaType"] == "V":
+                    #                    if msg.contentMetadata["serviceType"] == "GB":
+                    #                        ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}#".format(str(msg.contentMetadata["mediaOid"]))
+                   #                         murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(msg.contentMetadata["mediaOid"]))
+                    #                    else:
+                    #                        ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                    #                        murl = "\n  Media URL : https://obs-us.line-apps.com/myhome/h/download.nhn?{}".format(str(object_))
+                    #                    ret_ += murl
+                    #                else:
+                    #                    if msg.contentMetadata["serviceType"] == "GB":
+                    #                        ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(msg.contentMetadata["mediaOid"]))
+                    #                    else:
+                    #                        ourl = "\n  Object URL : https://obs-us.line-apps.com/myhome/h/download.nhn?tid=612w&{}".format(str(object_))
+                    #                ret_ += ourl
+                    #            if "stickerId" in msg.contentMetadata:
+                    #                stck = "\n  Sticker : https://line.me/R/shop/detail/{}".format(str(msg.contentMetadata["packageId"]))
+                    #                ret_ += stck
+                    #            if "text" in msg.contentMetadata:
+                    #                text = "\n  the contents of writing : {}".format(str(msg.contentMetadata["text"]))
+                    #                ret_ += text
+                    #            ret_ += "\n"
+                    #            puy.sendMessage(to, str(ret_))
+                    #        except:
+                    #            puy.sendMessage(to, "\nInvalid post\n")
             except Exception as error:
                 logError(error)
                 traceback.print_tb(error.__traceback__)

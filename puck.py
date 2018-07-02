@@ -348,7 +348,10 @@ def helpmessage():
                     " " + key + "1) About puy " + "\n" + \
                     " " + key + "2) Token" + "\n" + \
                     " " + key + "3) Keluar" + "\n" + \
-                    " " + key + "4) helpMedia" + "\n\n" + \
+                    " " + key + "4) helpMedia" + "\n" + \
+                    "   - Setautoadd: " + "\n" + \
+                    "   - Setautojoin: " + "\n" + \
+                    "   - Setautoreply: " + "\n\n" + \
                     " " + key + " 「 CEKSIDER & MENTION  」" + "\n" + \
                     " " + key + "5) Ceksider On/Off - [For SetRead]" + "\n" + \
                     " " + key + "6) Ceksider reset - [For Reset reader point]" + "\n" + \
@@ -1303,14 +1306,16 @@ def puyBot(op):
                             else:
                                 settings["keyCommand"] = str(key).lower()
                                 sendMessageWithFooter(to, "prefix diubah menjadi [ {} ]".format(str(key).lower()))        
-                        if text.lower() == "#prefix":
+                        if text.lower() == "prefix":
                             puy.sendMessage(to, "\nPrefix Saat ini adalah [ {} ]\n".format(str(settings["keyCommand"])))                                                                                            
-                        elif text.lower() == "#prefix on":
+                        elif text.lower() == "prefix on":
+                          if msg._from in Owner:
                             settings["setKey"] = True
-                            puy.sendMention(to, "@! \n\n[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix", [sender])
-                        elif text.lower() == "#prefix off":
+                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix"
+                        elif text.lower() == "prefix off":
+                          if msg._from in Owner:
                             settings["setKey"] = False
-                            puy.sendMention(to, "@! \n\n[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix", [sender])
+                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix"
             except Exception as error:
                 logError(error)
                 traceback.print_tb(error.__traceback__)                            

@@ -345,20 +345,20 @@ def helpmessage():
     else:
         key = ''
     helpMessage =   "\n  「 PUY  」     " + "\n" + \
-                    " " + key + "1) About puy " + "\n" + \
-                    " " + key + "2) Token" + "\n" + \
-                    " " + key + "3) Keluar" + "\n" + \
-                    " " + key + "4) helpMedia" + "\n" + \
+                    "1) " + key + "About puy " + "\n" + \
+                    "2) " + key + "Token" + "\n" + \
+                    "3) " + key + "Keluar" + "\n" + \
+                    "4) " + key + "helpMedia" + "\n" + \
                     "   - Setautoadd: " + "\n" + \
                     "   - Setautojoin: " + "\n" + \
                     "   - Setautoreply: " + "\n\n" + \
-                    " " + key + " 「 CEKSIDER & MENTION  」" + "\n" + \
-                    " " + key + "5) Ceksider On/Off - [For SetRead]" + "\n" + \
-                    " " + key + "6) Ceksider reset - [For Reset reader point]" + "\n" + \
-                    " " + key + "7) Ceksider - [For Ceksider]" + "\n\n" + \
-                    " Creator : @!" + "\n" + \
-                    "   「 Use " + key + " For the Prefix 」" + "\n" + \
-                    " 「 From Helloworld / Edited by Puy 」"
+                    "  「 CEKSIDER & MENTION  」" + "\n" + \
+                    "5) " + key + "Ceksider On/Off - [For SetRead]" + "\n" + \
+                    "6) " + key + "Ceksider reset - [For Reset reader point]" + "\n" + \
+                    "7) " + key + "Ceksider - [For Ceksider]" + "\n\n" + \
+                    "  「Use " + key + " For the Prefix」" + "\n" + \
+                    "  「From Helloworld / Edited by Puy」" + "\n" + \
+                    "~「Creator : @!」"
     return helpMessage
 
 def helpmedia():
@@ -366,20 +366,19 @@ def helpmedia():
         key = settings['keyCommand']
     else:
         key = ''
-    helpMedia =   "\n  「 MEDIA  」     " + "\n" + \
-                    " " + key + "8)  InstaInfo (Username)" + "\n" + \
-                    " " + key + "9)  InstaStory (Username*number)" + "\nExam :" + key +"Instastory muh.khadaffy*1\n" + \
-                    " " + key + "10) Quotes" + "\n" + \
-                    " " + key + "11) Carigambar (text)" + "\n" + \
-                    " " + key + "12) CariMusik (text)" + "\n" + \
-                    " " + key + "13) CariLirik (text)" + "\n" + \
-                    " " + key + "14) DoujinSearch (text)" + "\n" + \
-                    " " + key + "15) YoutubeSearch (text)" + "\n\n" + \
-                    " Creator : @!" + "\n" + \
-                    "  「 Use" + key + "For the Prefix 」" + "\n" + \
-                    " 「 From Helloworld / Edited by Puy 」"
+    helpMedia =   "\n  「 MEDIA 」     " + "\n" + \
+                    "8) " + key + "InstaInfo (Username)" + "\n" + \
+                    "9) " + key + "InstaStory (Username*number)" + "\nExam :" + key +"Instastory muh.khadaffy*1\n" + \
+                    "10) " + key + "Quotes" + "\n" + \
+                    "11) " + key + "Carigambar (text)" + "\n" + \
+                    "12) " + key + "CariMusik (text)" + "\n" + \
+                    "13) " + key + "CariLirik (text)" + "\n" + \
+                    "14) " + key + "DoujinSearch (text)" + "\n" + \
+                    "15) " + key + "YoutubeSearch (text)" + "\n\n" + \                    
+                    "  「Use " + key + " For the Prefix」" + "\n" + \
+                    "~「Creator : @!」"
     return helpMedia
-	
+
 def puyBot(op):
     try:
         if op.type == 0:
@@ -468,7 +467,6 @@ def puyBot(op):
                                 sendMentionFooter(to, "「 TOKEN TIPE  」\n1* DESKTOPWIN\n2* WIN10\n3* DESKTOPMAC\n4* IOSPAD\n5* CHROME\n\n*Usage : Type #login with Token Type\n\n*Example : #login chrome\n\n[ From BotEater / Edited by Puy ]\n@! - Selamat Mencoba.", [sender])
                                 
                             elif cmd == "speed":
-                              if sender in Owner:
                                 start = time.time()
                                 puy.sendMessage(to, "...")
                                 elapsed_time = time.time() - start
@@ -788,7 +786,7 @@ def puyBot(op):
                                 puy.leaveGroup(to)
                                          
                             elif cmd.startswith("bc: "):
-                              if msg._from in Owner:
+                              if sender in Owner:
                                 sep = text.split(" ")
                                 pesan = text.replace(sep[0] + " ","")
                                 saya = puy.getGroupIdsJoined()
@@ -870,7 +868,7 @@ def puyBot(op):
                                 data = url.json()
                                 puy.sendImageWithURL(to, random.choice(data["result"]))
                                                     
-                            elif cmd.startswith('About puy'):
+                            elif cmd.startswith("about puy"):
                                 try:
                                     arr = []
                                     Ownerz = "uac8e3eaf1eb2a55770bf10c3b2357c33"
@@ -889,7 +887,7 @@ def puyBot(op):
                                     #ret_ += "\n  Creator : {}".format(creator.displayName)
                                     #ret_ += "\n  Creator : @!".format(Owner)
                                     #puy.sendMessage(to, str(ret_))
-                                    sendMention(to, "「 About Puy 」\n\nThe Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\nCreator : @!", [Ownerz])
+                                    sendMention(to, "「 About Puy 」\n\nThe Beginning of this Bot Comes from Helloworld, I'm just Reworked This!\n\nOf Course Special Thanks To HelloWorld, And the Friends Around Me!\n\nCreator : @!", [Ownerz])
                                 except Exception as e:
                                     puy.sendMessage(msg.to, str(e))
 
@@ -1268,7 +1266,7 @@ def puyBot(op):
                             sendMention(to,'「 DESKTOPMAC 」\nUntuk : @!\nDari Grup : '+ab+'\nMid Kamu : '+ac+'\n\n-「 TOKEN 」  : \n{}\n\n- UA : Line/8.3.2\n- LA : DESKTOPMAC 8.8.3 PUY x64\n\n*「 From BotEater / Edited By PUY 」'.format(b), [sender])
 
                         elif cmd.startswith("setautoadd: "):
-                          if msg._from in Owner:
+                          if sender in Owner:
                             sep = text.split(" ")
                             txt = text.replace(sep[0] + " ","")
                             try:
@@ -1278,7 +1276,7 @@ def puyBot(op):
                                 puy.sendMessage(to, "Gagal mengubah pesan Add")
 
                         elif cmd.startswith("setautojoin: "):
-                          if msg._from in Owner:
+                          if sender in Owner:
                             sep = text.split(" ")
                             txt = text.replace(sep[0] + " ","")
                             try:
@@ -1288,7 +1286,7 @@ def puyBot(op):
                                 puy.sendMessage(to, "Gagal mengubah pesan Join")
 								
                         elif cmd.startswith("setautoreply: "):
-                          if msg._from in Owner:
+                          if sender in Owner:
                             sep = text.split(" ")
                             txt = text.replace(sep[0] + " ","")
                             try:
@@ -1298,27 +1296,32 @@ def puyBot(op):
                                 puy.sendMessage(to, "Gagal mengubah pesan autoReplyMention")
 
                         elif cmd.startswith("setprefix:"):
-                          if msg._from in Owner:
+                          if sender in Owner:
                             sep = text.split(" ")
                             key = text.replace(sep[0] + " ","")
                             if " " in key:
                                 puy.sendMessage(to, "\nTanpa spasi.\n")
                             else:
                                 settings["keyCommand"] = str(key).lower()
-                                sendMessageWithFooter(to, "prefix diubah menjadi [ {} ]".format(str(key).lower()))        
-                        if text.lower() == "prefix":
-                            puy.sendMessage(to, "\nPrefix Saat ini adalah [ {} ]\n".format(str(settings["keyCommand"])))                                                                                            
+                                puy.sendMessage(to, "prefix diubah menjadi [ {} ]".format(str(key).lower()))
+                                puy.sendMessage(to, "Prefix Saat ini adalah [ {} ]".format(str(settings["keyCommand"])))
+                            
                         elif text.lower() == "prefix on":
                           if msg._from in Owner:
-                            settings["setKey"] = True
-                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil mengaktifkan Prefix"
+                            if settings["setKey"] == True:
+                                puy.sendMessage(to, "Prefix telah aktif")
+                            else:
+                                settings["setKey"] = True
+                                puy.sendMessage(to, "Berhasil mengaktifkan Prefix")
                         elif text.lower() == "prefix off":
                           if msg._from in Owner:
-                            settings["setKey"] = False
-                            puy.sendMessage(to, "[ Notified Prefix Key ]\nBerhasil menonaktifkan Prefix"
+                            if settings["setKey"] == False:
+                                puy.sendMessage(to, "Prefix telah nonaktif")
+                            else:
+                                settings["setKey"] = False
+                                puy.sendMessage(to, "Berhasil menonaktifkan Prefix")
             except Exception as error:
                 logError(error)
-                traceback.print_tb(error.__traceback__)                            
         ## PREFIX ##          
         
         if op.type == 25:
